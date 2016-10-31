@@ -1,5 +1,7 @@
 
 # Data from: https://www.healthdata.gov/dataset/deaths-pnuemonia-and-influneza-and-all-deaths-state-and-region-national-center-health
+# Etherpad at http://bit.ly/dhmc-11-01-16
+
 
 library(tidyverse)
 library(stringr)
@@ -27,6 +29,23 @@ national_seasons <- national %>%
   group_by(season_start) %>%
   summarize(flu = sum(flu), pneumonia = sum(pneumonia), all_deaths = sum(all_deaths))
 
+# Times when it's fine for data not to be perfectly tidy
+p <- ggplot(national_seasons) +
+  geom_point(aes(x = flu, y = pneumonia))
+
+print(p)
+
+p <- ggplot(national_seasons) +
+  geom_point(aes(x = flu, y = pneumonia), color = "orange")
+
+print(p)
+
+p <- ggplot(national_seasons) +
+  geom_point(aes(x = flu, y = pneumonia, color = factor(season_start)))
+
+print(p)
+
+# Other times when it's easier for it to be so
 p <- ggplot(national_seasons) +
   geom_line(aes(x = season_start, y = flu)) +
   geom_text(aes(x = season_start, y = flu, label = flu)) +
@@ -37,6 +56,7 @@ p <- ggplot(national_seasons) +
 
 print(p)
 
+
 national_tidy <- national_seasons %>%
   gather(variable, value, flu:all_deaths)
 
@@ -46,7 +66,16 @@ p <- ggplot(national_tidy) +
 
 print(p)
 
-regional <- df %>%
-  filter(geoid == "Region" & age == "All") 
+national_age <- df %>%
+  filter(geoid == "National" & age != "All") %>%
+  group_by(season_start, age) %>%
+  summarize(flu = sum(flu), pneumonia = sum(pneumonia)) %>%
+  gather(illness, deaths, flu:pneumonia)
 
-p <- ggplot(regional)
+
+p_age <- ggplot(national_age, aes(x = illness, y = deaths)) +
+  geom_bar(aes(fill = illness), stat = "identity") +
+  facet_grid(age~season_start)
+
+
+print(p_age)
