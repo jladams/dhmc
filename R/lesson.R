@@ -17,7 +17,7 @@ df <- read_csv("./data/deaths.csv")
 df <- df %>%
   separate(season, into = c("season_start", "season_end"), convert = TRUE) %>%
   mutate(week = str_sub(`MMWR Year/Week`, start = 5), year = str_sub(`MMWR Year/Week`, end = 4)) %>%
-  select(geoid, region = Region, age, week, year, season_start, flu = `Deaths from influenza`, pneumonia = `Deaths from pneumonia`, all_deaths = `All Deaths`)
+  select(geoid, region = Region, state = State, age, week, year, season_start, flu = `Deaths from influenza`, pneumonia = `Deaths from pneumonia`, all_deaths = `All Deaths`)
 
 write_csv(df, "./data/deaths_cleaned.csv")
 
