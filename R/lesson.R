@@ -34,6 +34,9 @@ ggplot(regional, aes(x = flu, y = pneumonia)) +
 ggplot(regional, aes(x = flu, y = pneumonia)) +
   geom_point(aes(color = region))
 
+ggplot(regional, aes(x = flu, y = pneumonia)) +
+  geom_point(aes(color = region)) +
+  scale_x_log10()
 
 # Other times when it's easier for it to be so
 national <- df %>%
