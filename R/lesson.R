@@ -19,6 +19,8 @@ df <- df %>%
   mutate(week = str_sub(`MMWR Year/Week`, start = 5), year = str_sub(`MMWR Year/Week`, end = 4)) %>%
   select(geoid, region = Region, age, week, year, season_start, flu = `Deaths from influenza`, pneumonia = `Deaths from pneumonia`, all_deaths = `All Deaths`)
 
+write_csv(df, "./data/deaths_cleaned.csv")
+
 # Times when it's fine for data not to be perfectly tidy
 regional <- df %>%
   filter(geoid == "Region" & age == "All")
