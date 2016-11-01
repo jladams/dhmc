@@ -38,6 +38,11 @@ ggplot(regional, aes(x = flu, y = pneumonia)) +
   geom_point(aes(color = region)) +
   scale_x_log10()
 
+ggplot(regional, aes(x = flu, y = pneumonia)) +
+  geom_point(aes(color = region)) +
+  scale_x_log10() +
+  geom_smooth(method = "lm")
+
 # Other times when it's easier for it to be so
 national <- df %>%
   filter(geoid == "National" & age == "All")
