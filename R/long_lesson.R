@@ -51,7 +51,8 @@ mutate()
 
 # select() and pipe
 year_country_gdp <- select(gapminder,year,country,gdpPercap)
-year_country_gdp <- gapminder %>% select(year,country,gdpPercap)
+year_country_gdp <- gapminder %>% 
+  select(year,country,gdpPercap)
 
 # How the pipe works
 foo_foo <- little_bunny()
