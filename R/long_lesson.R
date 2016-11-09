@@ -1,4 +1,5 @@
 
+# Etherpad link: http://bit.ly/dartmouth-2016-11-09-pad
 # Thank you for coming to today's presentation!
 # I've included some of the code we'll be using today on this Etherpad.
 
@@ -24,7 +25,6 @@ new_fun <- function(x) { # Creates a function called new_fun that takes one argu
 }
 
 new_fun(4) # Try it out with any number
-
 
 
 # Install Packages We'll Use
@@ -239,6 +239,15 @@ ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) +
   scale_x_log10() +
   geom_smooth(method="lm", size=1.5) +
   facet_grid(year~continent)
+
+# Customizing with themes
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) +
+  geom_point() + 
+  scale_x_log10() +
+  geom_smooth(method="lm", size=1.5) +
+  facet_grid(year~continent) +
+  theme_bw()
+
 
 # Other Resources
 # ggplot2 cheat sheet: https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
